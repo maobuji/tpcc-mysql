@@ -1,3 +1,6 @@
+在对分布式数据库TiDB进行测试时发现，提交批量过大。
+故增加了提交批量的选项。其它操作保持不变。
+
 1. Build binaries
    * `cd src ; make`
    ( you should have mysql_config available in $PATH)
