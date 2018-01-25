@@ -760,6 +760,8 @@ int thread_main (thread_arg* arg)
 
   if(resp) {
     mysql_autocommit(ctx[t_num], 0);
+    mysql_autocommit(ctx[t_num], 0);
+    mysql_autocommit(ctx[t_num], 0);
   } else {
     mysql_close(ctx[t_num]);
     goto sqlerr;
