@@ -42,10 +42,6 @@ int             i;
 int             option_debug = 0;	/* 1 if generating debug output    */
 int             is_local = 1;           /* "1" mean local */
 
-static long            commitBatch=0;
-static long            exeSqlCount=0;
-
-
 #define DB_STRING_MAX 51
 
 #include "parse_port.h"
@@ -57,17 +53,8 @@ try_stmt_execute(MYSQL_STMT *mysql_stmt)
     if (ret) {
         printf("\n%d, %s, %s\n", mysql_errno(mysql), mysql_sqlstate(mysql), mysql_error(mysql) );
         mysql_rollback(mysql);
-    }else{
-        if(commitBatch!=0){
-            exeSqlCount=exeSqlCount+1;
-            if (!(exeSqlCount % commitBatch))
-                if( mysql_commit(mysql) ) goto Error_SqlCall;
-       }
     }
     return ret;
-
-    Error_SqlCall:
-    Error(0);
 }
 
 /*
@@ -102,7 +89,7 @@ main(argc, argv)
 
   /* Parse args */
 
-    while ( (c = getopt(argc, argv, "h:P:d:u:p:w:l:m:n:b:")) != -1) {
+    while ( (c = getopt(argc, argv, "h:P:d:u:p:w:l:m:n:")) != -1) {
         switch (c) {
         case 'h':
             printf ("option h with value '%s'\n", optarg);
@@ -141,12 +128,8 @@ main(argc, argv)
             printf ("option P with value '%s'\n", optarg);
             port = atoi(optarg);
             break;
-        case 'b':
-            printf ("option b with value '%s'\n", optarg);
-            commitBatch = atoi(optarg);
-            break;
         case '?':
-    	    printf("Usage: tpcc_load -h server_host -P port -d database_name -u mysql_user -p mysql_password -w warehouses -l part -m min_wh -n max_wh -b commit_batch\n");
+    	    printf("Usage: tpcc_load -h server_host -P port -d database_name -u mysql_user -p mysql_password -w warehouses -l part -m min_wh -n max_wh\n");
     	    printf("* [part]: 1=ITEMS 2=WAREHOUSE 3=CUSTOMER 4=ORDERS\n");
             exit(0);
         default:
@@ -340,8 +323,8 @@ LoadItems()
 	MYSQL_BIND    param[5];
 
 	/* EXEC SQL WHENEVER SQLERROR GOTO sqlerr; */
-	printf("Loading Item \n");
 
+	printf("Loading Item \n");
 
 	for (i = 0; i < MAXITEMS / 10; i++)
 		orig[i] = 0;
@@ -416,8 +399,11 @@ retry:
 			printf(".");
 			fflush(stdout);
 
-			if (!(i_id % 5000))
+			if (!(i_id % 5000)) {
 				printf(" %ld\n", i_id);
+				if( mysql_commit(mysql) ) goto sqlerr;
+			}
+			  
 		}
 	}
 
@@ -719,8 +705,10 @@ retry:
 		if (!(s_i_id % 100)) {
 			printf(".");
 			fflush(stdout);
-			if (!(s_i_id % 5000))
+			if (!(s_i_id % 5000)) {
 				printf(" %ld\n", s_i_id);
+				mysql_commit(mysql);
+			}
 		}
 	}
 
