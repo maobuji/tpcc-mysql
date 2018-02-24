@@ -24,9 +24,9 @@ select count(1),'warehouse' from warehouse<br>
 
     | 一个仓库 | 2个仓库 | 3个仓库
 ------------ | ---------------
-customer|30000|60000|180000
-district|10|20|60
-history|30000|60000|180000
+customer | 30000 | 60000 | 180000
+district | 10 | 20 | 60
+history | 30000 | 60000 | 180000
 item|100000|100000|100000
 new_orders|9000|18000|54000
 order_line|299976|598908|1799838
