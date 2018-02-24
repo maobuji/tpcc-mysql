@@ -20,7 +20,7 @@ select count(1),'stock' from stock<br>
 UNION ALL<br>
 select count(1),'warehouse' from warehouse<br>
 
-表数据量与初始化仓库数量的关系
+* 表数据量与初始化仓库数量的关系
 
 列名| 一个仓库 | 2个仓库 | 6个仓库
 ------------ | --------------- | ------------ | ------------ 
