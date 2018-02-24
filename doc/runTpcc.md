@@ -19,20 +19,22 @@ make成功后会在tpcc-mysql目录下生成tpcc_load和tpcc_start两个文件<b
 初始化
 ===
 
-###创建库
+* 创建库<br>
 mysqladmin -h127.0.0.1 -P3306 -uroot -proot create tpcc1000
-###创建表
+* 创建表<br>
 mysql -h127.0.0.1 -P3306 -uroot -proot -f tpcc1000 < create_table.sql
-###创建外键
+* 创建外键<br>
 mysql -h127.0.0.1 -P3306 -uroot -proot -S /tmp/mysql.sock tpcc1000 < add_fkey_idx.sql
 
-###加载测试数据
-./tpcc_load -h127.0.0.1 -P3306 -uroot -proot -dtpcc1000 -w1<br>
+* 加载测试数据<br>
+./tpcc_load -h127.0.0.1 -P3306 -uroot -proot -dtpcc1000 -w2<br>
 
--h 主机IP     -P 端口号     -u 用户名      -p 密码     -d 数据库名     -w仓库数量
+  -h 主机IP     -P 端口号     -u 用户名      -p 密码     -d 数据库名     -w仓库数量
 
 运行
 ====
+
+* 执行数据导入
 ./tpcc_start -h 127.0.0.1 -P 3306 -d tpcc1000 -u root -p root -w 10 -c 64 -r 30 -l 120 -f tpcclog_201409211538_64_THREADS.log >> tpcc_noaid_2_20140921_64.log 2>&1<br>
 
 
