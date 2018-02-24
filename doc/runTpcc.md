@@ -1,16 +1,15 @@
 编译
 =======
-首先需要在本机安装mysql、git<br>
+* 首先需要在本机安装mysql、git<br>
 
-创建一个目录用来存放tpcc-mysql的测试代码<br>
-
+* 创建一个目录用来存放tpcc-mysql的测试代码<br>
 mkdir tpcc<br>
 cd tpcc<br>
 git clone https://github.com/maobuji/tpcc-mysql.git<br>
 cd tpcc-mysql/src<br>
 make
 
-如果make失败，则需要安装以下组件：<br>
+* 如果make失败，则需要安装以下组件：<br>
 yum install mysql-devel<br>
 yum install gcc<br>
 
