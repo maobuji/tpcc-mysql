@@ -30,6 +30,7 @@ mysql -h127.0.0.1 -P3306 -uroot -proot -S /tmp/mysql.sock tpcc1000 < add_fkey_id
 
   -h 主机IP     -P 端口号     -u 用户名      -p 密码     -d 数据库名     -w仓库数量
 
+
 运行
 ====
 
@@ -37,3 +38,5 @@ mysql -h127.0.0.1 -P3306 -uroot -proot -S /tmp/mysql.sock tpcc1000 < add_fkey_id
 ./tpcc_start -h 127.0.0.1 -P 3306 -d tpcc1000 -u root -p root -w 10 -c 64 -r 30 -l 120 -f tpcclog_201409211538_64_THREADS.log >> tpcc_noaid_2_20140921_64.log 2>&1<br>
 
   -h 主机IP     -P 端口号     -u 用户名      -p 密码     -d 数据库名     -w仓库数量     -c 并发数     -r 预热时间     -l 持续测试时间      -i 报告生成间隔时长      -f 生成的报告名
+
+

@@ -1,0 +1,21 @@
+初始化以后查看各表的数据量
+====
+
+* 查看一下各表导入的数据量<br>
+select count(1),'customer' from customer<br>
+UNION ALL<br>
+select count(1),'district' from district<br>
+UNION ALL<br>
+select count(1),'history' from history<br>
+UNION ALL<br>
+select count(1),'item' from item<br>
+UNION ALL<br>
+select count(1),'new_orders' from new_orders<br>
+UNION ALL<br>
+select count(1),'order_line' from order_line<br>
+UNION ALL<br>
+select count(1),'orders' from orders<br>
+UNION ALL<br>
+select count(1),'stock' from stock<br>
+UNION ALL<br>
+select count(1),'warehouse' from warehouse<br>
