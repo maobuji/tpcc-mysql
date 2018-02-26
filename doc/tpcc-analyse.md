@@ -17,7 +17,7 @@ TPC(Transaction Processing Performance Council，事务处理性能委员会)是
 
 
 
-![image](https://github.com/maobuji/tpcc-mysql/blob/master/doc/TPCC-MYSQL-model.png)
+![image](https://github.com/maobuji/tpcc-mysql/blob/master/doc/img/TPCC-MYSQL-model.png)
 
 
 初始化以后查看各表的数据量
@@ -66,6 +66,9 @@ select count(1),'warehouse' from warehouse<br>
 ====
 
 -c参数决定了并发连接数量，每个并发就会建立一个数据库连接，持续进行业务操作<br>
+
+在mysql中可以使用 show processlist查看连接数量以及正在执行的SQL语句<br>
+![image](https://github.com/maobuji/tpcc-mysql/blob/master/doc/img/showprocesslist.png)
 
 执行后数据量的变化情况
 
