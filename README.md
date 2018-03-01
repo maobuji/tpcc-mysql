@@ -1,5 +1,7 @@
 在对分布式数据库TiDB进行测试时发现，提交批量过大，TIDB会报事务过大
-修改了源代码，每5000条会进行一次提交
+load过程中增加了-b选项，可以调整load过程中的提交批量
+
+TIDB使用乐观锁，所以会导致select for update直接失败，所以tpcc的测试结果会失真，只能做一个参考了。
 
 1. Build binaries
    * `cd src ; make`
